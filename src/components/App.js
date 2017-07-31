@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Slider from 'material-ui/Slider';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 //FlexBox
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -38,7 +39,7 @@ class App extends Component {
         context.fillStyle = this.state.color;
         let textValue;
         text.value ? (textValue = '“' + text.value + '”') : (textValue = '');
-        context.fillText(textValue,this.state.xOffset,140);
+        context.fillText(textValue,this.state.xOffset,this.state.yOffset);
       })
     }
 
@@ -53,20 +54,39 @@ class App extends Component {
       this.updateCanvas();
     };
 
+    handleyOffsetSlider = (event, value) => {
+      this.setState({yOffset: value});
+      this.updateCanvas();
+    };
+
+    handleColorRadio = (event, value) => {
+      this.setState({color: value});
+      this.updateCanvas();
+    };
+
   constructor(){
     super();
     this.state = {
       size: 100,
       xOffset: 30,
+      yOffset: 140,
       color : '#000',
       image : 'Pattern_1.jpg'
     };
   }
   render() {
 
-    const canvasStyle = {
-      width:'100%',
-      height:'100%'
+    const styles = {
+      canvasStyle : {
+        width:'100%',
+        height:'100%'
+      },
+      block: {
+        maxWidth: 10,
+      },
+      radioButton: {
+        marginBottom: 16,
+      },
     };
 
     return (
@@ -75,7 +95,7 @@ class App extends Component {
           <Grid>
             <Row center="xs">
               <Col>
-                <canvas id="canvas" width={851} height={315} style={canvasStyle}></canvas>
+                <canvas id="canvas" width={851} height={315} style={styles.canvasStyle}></canvas>
               </Col>
             </Row>
             <Row center="xs">
@@ -85,6 +105,7 @@ class App extends Component {
                 floatingLabelText="Quote"
                 defaultValue="Bossily Cover"
               /><br/>
+              <br/>Size
               <Slider
                 id="size"
                 min={10}
@@ -93,16 +114,49 @@ class App extends Component {
                 value={this.state.size}
                 onChange={this.handleSizeSlider}
               />
-              <Slider
-                id="xOffset"
-                min={0}
-                max={800}
-                step={1}
-                value={this.state.xOffset}
-                onChange={this.handlexOffsetSlider}
-              /><br/>
-              <RaisedButton label="Secondary" secondary={true} />
               </Col>
+            </Row>
+            <Row center="xs">
+              <Col xs={6}>
+              X
+                <Slider
+                  id="xOffset"
+                  min={0}
+                  max={800}
+                  step={1}
+                  value={this.state.xOffset}
+                  onChange={this.handlexOffsetSlider}
+                />
+              </Col>
+              <Col xs={2}>
+              Y
+                <Row center="xs">
+                  <Slider
+                  id="yOffset"
+                  axis="y-reverse"
+                  min={0}
+                  max={300}
+                  step={1}
+                  style={{height: 100}}
+                  value={this.state.yOffset}
+                  onChange={this.handleyOffsetSlider}
+                />
+                </Row>
+              </Col>
+            </Row>
+            <Row center="xs">
+              <RadioButtonGroup name="color" defaultSelected={this.state.color} onChange={this.handleColorRadio}>
+                <RadioButton
+                  value="#fff"
+                  label="White"
+                  style={styles.radioButton}
+                />
+                <RadioButton
+                  value="#000"
+                  label="Black"
+                  style={styles.radioButton}
+                />
+              </RadioButtonGroup>
             </Row>
           </Grid>          
         </div>
