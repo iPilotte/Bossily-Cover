@@ -87,7 +87,7 @@ class App extends Component {
               /><br/>
               <Slider
                 id="size"
-                min={0}
+                min={10}
                 max={100}
                 step={1}
                 value={this.state.size}
