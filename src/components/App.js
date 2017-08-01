@@ -17,16 +17,20 @@ class App extends Component {
 
     componentDidMount(){
       this.updateCanvas();
-      var text = document.getElementById('text');
+      var quoteText = document.getElementById('quotetext')
+      ,   saidBy = document.getElementById('saidby');
 
-      text.onkeyup = (() => this.updateCanvas());
-      text.onchange = (() => this.updateCanvas());
+      quoteText.onkeyup = (() => this.updateCanvas());
+      quoteText.onchange = (() => this.updateCanvas());
+      saidBy.onkeyup = (() => this.updateCanvas());
+      saidBy.onchange = (() => this.updateCanvas());
     }
 
     updateCanvas(){
       var canvas = document.getElementById('canvas')
       ,   context = canvas.getContext('2d')
-      ,   text = document.getElementById('text');
+      ,   quoteText = document.getElementById('quotetext')
+      ,   saidBy = document.getElementById('saidby');
 
       var image = new Image();
 
@@ -39,18 +43,25 @@ class App extends Component {
         image.src = require('../assets/templates/'+this.state.image+'');
         context.drawImage(image, 0, 0);
 
-        context.font = this.state.size + 'px TH Sarabun New';
+
+        //Quote
+        context.font = this.state.size + 'px Roboto';
         context.fillStyle = this.state.color;
 
-        let textValue;
-        text.value ? (textValue = '“' + text.value + '”') : (textValue = '');
-        context.fillText(textValue,this.state.xOffset,this.state.yOffset);
+        let quote;
+        quoteText.value ? (quote = '“' + quoteText.value + '”') : (quote = '');
+        context.fillText(quote,this.state.xOffset,this.state.yOffset);
 
-        const bossxOffset = context.measureText(textValue).width/1.5;
-        context.font = this.state.size/3 + 'px TH Sarabun New';
+
+        //Said
+        context.font = this.state.size/2.5 + 'px TH Sarabun New';
         context.fillStyle = this.state.color;
-        const bossy = '-ประถมพบ-';
-        context.fillText(bossy,this.state.xOffset+bossxOffset,this.state.yOffset+20);
+
+        let said;
+        saidBy.value ? (said = '' + saidBy.value + '') : (said = '');
+        const saidxOffset = (context.measureText(quote).width*3.3)-(context.measureText(said).width);
+        const saidyOffset = this.state.size/3.5;
+        context.fillText(said,this.state.xOffset+saidxOffset,this.state.yOffset+saidyOffset);
       })
     }
 
@@ -116,11 +127,23 @@ class App extends Component {
             </Row>
             <Row center="xs">
               <Col xs={8}>
-              <TextField
-                id="text"
-                floatingLabelText="Quote"
-                defaultValue="Bossily Cover"
-              /><br/>
+              <Row center="xs">
+                <Col xs={6}> 
+                <TextField
+                    id="quotetext"
+                    floatingLabelText="Quote"
+                    defaultValue="Bossily Cover"
+                  />
+                </Col>
+                <Col xs={6}>
+                <TextField
+                    id="saidby"
+                    floatingLabelText="By"
+                    defaultValue="-ประถมพบ-"
+                  />
+                </Col>                  
+              </Row>
+              <br/>
               <br/>Size
               <Slider
                 id="size"
@@ -175,22 +198,24 @@ class App extends Component {
                   />
                 </RadioButtonGroup>
               </Col>
-              <Col xs={3} xsOffset={1}>
-                <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
-                    <RadioButton
-                      value="Pattern_1.jpg"
-                      label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={255} height={93}/>}
-                      style={styles.radioButton}
-                    />
-                    <RadioButton
-                      value="Pattern_2.jpg"
-                      label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={255} height={93}/>}
-                      style={styles.radioButton}
-                    />
-                </RadioButtonGroup>
-              </Col>
             </Row>
-          </Grid>          
+              {/* <Row center="xs">
+                <Col xs={3} xsOffset={1}>
+                  <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
+                      <RadioButton
+                        value="Pattern_1.jpg"
+                        label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={255} height={93}/>}
+                        style={styles.radioButton}
+                      />
+                      <RadioButton
+                        value="Pattern_2.jpg"
+                        label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={255} height={93}/>}
+                        style={styles.radioButton}
+                      />
+                  </RadioButtonGroup>
+                </Col>
+              </Row> */}
+          </Grid>           
         </div>
       </MuiThemeProvider>
     );
