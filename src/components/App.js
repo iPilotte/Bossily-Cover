@@ -127,15 +127,16 @@ class App extends Component {
             </Row>
             <Row center="xs">
               <Col xs={8}>
-              <Row center="xs">
-                <Col xs={6}> 
+              <Row start="xs">
+                <Col xs> 
                 <TextField
                     id="quotetext"
                     floatingLabelText="Quote"
                     defaultValue="Bossily Cover"
                   />
                 </Col>
-                <Col xs={6}>
+                <Col xs/>
+                <Col xs>
                 <TextField
                     id="saidby"
                     floatingLabelText="By"
@@ -183,8 +184,8 @@ class App extends Component {
                 </Row>
               </Col>
             </Row>
-            <Row center="xs">
-              <Col xs={1}>
+            <Row start="xs">
+              <Col xs={6} xsOffset={3}>
                 <RadioButtonGroup name="color" defaultSelected={this.state.color} onChange={this.handleColorRadio}>
                   <RadioButton
                     value="#fff"
@@ -198,23 +199,24 @@ class App extends Component {
                   />
                 </RadioButtonGroup>
               </Col>
+              <Col xs={2}/>
             </Row>
-              {/* <Row center="xs">
-                <Col xs={3} xsOffset={1}>
+               <Row start="xs">
+                <Col xs={3} xsOffset={2}>
                   <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
                       <RadioButton
                         value="Pattern_1.jpg"
-                        label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={255} height={93}/>}
+                        label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={170} height={62}/>}
                         style={styles.radioButton}
                       />
                       <RadioButton
                         value="Pattern_2.jpg"
-                        label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={255} height={93}/>}
+                        label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={170} height={62}/>}
                         style={styles.radioButton}
                       />
                   </RadioButtonGroup>
                 </Col>
-              </Row> */}
+              </Row> 
           </Grid>           
         </div>
       </MuiThemeProvider>
