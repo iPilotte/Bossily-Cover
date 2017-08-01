@@ -94,7 +94,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      size: 100,
+      size: 75,
       xOffset: 30,
       yOffset: 140,
       color : '#000',
