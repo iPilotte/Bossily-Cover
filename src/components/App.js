@@ -201,22 +201,25 @@ class App extends Component {
               </Col>
               <Col xs={2}/>
             </Row>
-               <Row start="xs">
-                <Col xs={3} xsOffset={2}>
-                  <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
-                      <RadioButton
-                        value="Pattern_1.jpg"
-                        label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={170} height={62}/>}
-                        style={styles.radioButton}
-                      />
-                      <RadioButton
-                        value="Pattern_2.jpg"
-                        label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={170} height={62}/>}
-                        style={styles.radioButton}
-                      />
-                  </RadioButtonGroup>
-                </Col>
-              </Row> 
+            <hr/><br/>
+            <Row center="xs">
+              <Col xs/>
+              <Col xs>
+                <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
+                    <RadioButton
+                      value="Pattern_1.jpg"
+                      label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={170} height={62}/>}
+                      style={styles.radioButton}
+                    />
+                    <RadioButton
+                      value="Pattern_2.jpg"
+                      label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={170} height={62}/>}
+                      style={styles.radioButton}
+                    />
+                </RadioButtonGroup>
+              </Col>
+              <Col xs/>
+            </Row> 
           </Grid>           
         </div>
       </MuiThemeProvider>
