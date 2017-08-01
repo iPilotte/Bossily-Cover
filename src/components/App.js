@@ -127,33 +127,31 @@ class App extends Component {
             </Row>
             <Row center="xs">
               <Col xs={8}>
-              <Row start="xs">
-                <Col xs> 
-                <TextField
-                    id="quotetext"
-                    floatingLabelText="Quote"
-                    defaultValue="Bossily Cover"
-                  />
-                </Col>
-                <Col xs/>
-                <Col xs>
-                <TextField
-                    id="saidby"
-                    floatingLabelText="By"
-                    defaultValue="-ประถมพบ-"
-                  />
-                </Col>                  
-              </Row>
-              <br/>
-              <br/>Size
-              <Slider
-                id="size"
-                min={10}
-                max={100}
-                step={1}
-                value={this.state.size}
-                onChange={this.handleSizeSlider}
-              />
+                <Row center="xs">
+                  <Col xs> 
+                    <TextField
+                      id="quotetext"
+                      floatingLabelText="Quote"
+                      defaultValue="Bossily Cover"
+                    />
+                    {' '}
+                    <TextField
+                      id="saidby"
+                      floatingLabelText="By"
+                      defaultValue="-ประถมพบ-"
+                    />
+                  </Col>               
+                </Row>
+                <br/>
+                <br/>Size
+                <Slider
+                  id="size"
+                  min={10}
+                  max={100}
+                  step={1}
+                  value={this.state.size}
+                  onChange={this.handleSizeSlider}
+                />
               </Col>
             </Row>
             <Row center="xs">
