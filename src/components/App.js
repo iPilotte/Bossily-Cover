@@ -218,7 +218,7 @@ class App extends Component {
             <hr/><br/>
             <Row center="xs">
               <Col xs/>
-              <Col xs={8}>
+              <Col xs={12}>
                 <RaisedButton
                   label="Choose Image"
                   id="drawerBtn"
