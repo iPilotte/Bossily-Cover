@@ -112,7 +112,7 @@ class App extends Component {
   render() {
 
     const styles = {
-      canvasStyle : {
+      fullWH : {
         width:'100%',
         height:'100%'
       },
@@ -130,31 +130,31 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <Grid>
+          <Grid >
             <Row center="xs">
               <Col>
-                <canvas id="canvas" width={851} height={315} style={styles.canvasStyle}></canvas>
+                <canvas id="canvas" width={851} height={315} style={styles.fullWH}></canvas>
               </Col>
             </Row>
             <Row center="xs">
               <Col xs={8}>
                 <Row center="xs">
-                  <Col xs> 
+                  <Col xs={6}> 
                     <TextField
                       id="quotetext"
                       floatingLabelText="Quote"
                       defaultValue="Bossily Cover"
+                      style = {{width: '100%'}}
                     />
                     {' '}
-                    <TextField
+                  </Col>
+                  <Col xs={6}><TextField
                       id="saidby"
                       floatingLabelText="By"
                       defaultValue="-ประถมพบ-"
-                    />
-                  </Col>               
+                      style = {{width: '100%'}}
+                    /></Col>    
                 </Row>
-                <br/>
-                <br/>Size
                 <Slider
                   id="size"
                   min={10}
@@ -165,9 +165,8 @@ class App extends Component {
                 />
               </Col>
             </Row>
-            <Row center="xs">
+            <Row center="xs" style={{'margin-top' :'-10%'}}>
               <Col xs={6}>
-              X
                 <Slider
                   id="xOffset"
                   min={0}
@@ -178,7 +177,6 @@ class App extends Component {
                 />
               </Col>
               <Col xs={2}>
-              Y
                 <Row center="xs">
                   <Slider
                   id="yOffset"
@@ -247,7 +245,6 @@ class App extends Component {
               </Col>
               <Col xs/>
             </Row> 
-            <br/><br/>
           </Grid>
         </div>
       </MuiThemeProvider>
