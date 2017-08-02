@@ -165,7 +165,7 @@ class App extends Component {
                 />
               </Col>
             </Row>
-            <Row center="xs" style={{'margin-top' :'-10%'}}>
+            <Row center="xs" middle="xs" style={{'margin-top' :'-1%'}}>
               <Col xs={6}>
                 <Slider
                   id="xOffset"
@@ -176,7 +176,8 @@ class App extends Component {
                   onChange={this.handlexOffsetSlider}
                 />
               </Col>
-              <Col xs={2}>
+              {' '}
+              <Col xs={2} style={{'margin-top' :'-5%'}}>
                 <Row center="xs">
                   <Slider
                   id="yOffset"
