@@ -98,6 +98,12 @@ class App extends Component {
     handleToggleDrawer = () => this.setState({drawerOpen: !this.state.drawerOpen});
     handleCloseDrawer = () => this.setState({drawerOpen: false});
 
+    handleDownload = () => {
+      var link = document.getElementById('downloadBtn');
+      link.href = document.getElementById('canvas').toDataURL();
+      link.download = 'boss_' + document.getElementById('quotetext').value + '.jpg';
+    };
+
   constructor(props){
     super(props);
     this.state = {
@@ -143,7 +149,7 @@ class App extends Component {
                     <TextField
                       id="quotetext"
                       floatingLabelText="Quote"
-                      defaultValue="Bossily Cover"
+                      defaultValue="Bossily_Cover"
                       style = {{width: '100%'}}
                     />
                     {' '}
@@ -165,7 +171,7 @@ class App extends Component {
                 />
               </Col>
             </Row>
-            <Row center="xs" middle="xs" style={{'margin-top' :'-1%'}}>
+            <Row center="xs" middle="xs" style={{'marginTop' :'-1%'}}>
               <Col xs={6}>
                 <Slider
                   id="xOffset"
@@ -177,7 +183,7 @@ class App extends Component {
                 />
               </Col>
               {' '}
-              <Col xs={2} style={{'margin-top' :'-5%'}}>
+              <Col xs={2} style={{'marginTop' :'-5%'}}>
                 <Row center="xs">
                   <Slider
                   id="yOffset"
@@ -215,10 +221,19 @@ class App extends Component {
               <Col xs={8}>
                 <RaisedButton
                   label="Choose Image"
+                  id="drawerBtn"
                   primary={true}
                   onTouchTap={this.handleToggleDrawer}
                   style={styles.buttonStyle}
-                />
+                />{' '}
+                <a id="downloadBtn">
+                  <RaisedButton
+                    label="Download"
+                    secondary={true}
+                    onTouchTap={this.handleDownload}
+                    style={styles.buttonStyle}
+                  />
+                </a>
                 <Drawer
                   docked={false}
                   width={'70%'}
@@ -228,18 +243,20 @@ class App extends Component {
                 <Row center="xs"><h4>CHOOSE YOUR IMAGE</h4></Row>
                 <Row center="xs">
                   <Col xs/>
-                  <Col xs><RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
-                    <RadioButton
-                      value="Pattern_1.jpg"
-                      label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={170} height={62}/>}
-                      style={styles.radioButton}
-                    />
-                    <RadioButton
-                      value="Pattern_2.jpg"
-                      label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={170} height={62}/>}
-                      style={styles.radioButton}
-                    />
-                </RadioButtonGroup></Col>
+                  <Col xs>
+                    <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
+                      <RadioButton
+                        value="Pattern_1.jpg"
+                        label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={170} height={62}/>}
+                        style={styles.radioButton}
+                      />
+                      <RadioButton
+                        value="Pattern_2.jpg"
+                        label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={170} height={62}/>}
+                        style={styles.radioButton}
+                      />
+                  </RadioButtonGroup>
+                  </Col>
                   <Col xs/>
                 </Row>
                 </Drawer>
