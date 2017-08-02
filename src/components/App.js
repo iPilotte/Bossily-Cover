@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 //Material-UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import RaisedButton from 'material-ui/RaisedButton'; 
+import RaisedButton from 'material-ui/RaisedButton'; 
 import TextField from 'material-ui/TextField';
 import Slider from 'material-ui/Slider';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import Drawer from 'material-ui/Drawer';
 
 //FlexBox
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -14,6 +15,8 @@ import '../assets/css/App.css';
 
 
 class App extends Component {  
+
+    // componentWillMount(){}
 
     componentDidMount(){
       this.updateCanvas();
@@ -89,14 +92,19 @@ class App extends Component {
     handleImageRadio = (event, value) => {
       this.setState({image: value});
       this.updateCanvas();
+      this.handleCloseDrawer();
     };
 
-  constructor(){
-    super();
+    handleToggleDrawer = () => this.setState({drawerOpen: !this.state.drawerOpen});
+    handleCloseDrawer = () => this.setState({drawerOpen: false});
+
+  constructor(props){
+    super(props);
     this.state = {
       size: 75,
       xOffset: 30,
       yOffset: 140,
+      drawerOpen: false,
       color : '#000',
       image : 'Pattern_1.jpg'
     };
@@ -112,7 +120,10 @@ class App extends Component {
         maxWidth: 10,
       },
       radioButton: {
-        marginBottom: 16,
+        marginBottom: 10,
+      },
+      buttonStyle: {
+        margin: 12,
       },
     };
 
@@ -202,8 +213,23 @@ class App extends Component {
             <hr/><br/>
             <Row center="xs">
               <Col xs/>
-              <Col xs>
-                <RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
+              <Col xs={8}>
+                <RaisedButton
+                  label="Choose Image"
+                  primary={true}
+                  onTouchTap={this.handleToggleDrawer}
+                  style={styles.buttonStyle}
+                />
+                <Drawer
+                  docked={false}
+                  width={'70%'}
+                  open={this.state.drawerOpen}
+                  onRequestChange={(drawerOpen) => this.setState({drawerOpen})}
+                >
+                <Row center="xs"><h4>CHOOSE YOUR IMAGE</h4></Row>
+                <Row center="xs">
+                  <Col xs/>
+                  <Col xs><RadioButtonGroup name="image" defaultSelected={this.state.image} onChange={this.handleImageRadio}>
                     <RadioButton
                       value="Pattern_1.jpg"
                       label={<img src={require('../assets/templates/Pattern_1.jpg')} alt='Pattern_1' width={170} height={62}/>}
@@ -214,11 +240,15 @@ class App extends Component {
                       label={<img src={require('../assets/templates/Pattern_2.jpg')} alt='Pattern_2' width={170} height={62}/>}
                       style={styles.radioButton}
                     />
-                </RadioButtonGroup>
+                </RadioButtonGroup></Col>
+                  <Col xs/>
+                </Row>
+                </Drawer>
               </Col>
               <Col xs/>
             </Row> 
-          </Grid>           
+            <br/><br/>
+          </Grid>
         </div>
       </MuiThemeProvider>
     );
