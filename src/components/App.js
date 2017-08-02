@@ -48,7 +48,7 @@ class App extends Component {
 
 
         //Quote
-        context.font = this.state.size + 'px Roboto';
+        context.font = this.state.size + 'px Kanit';
         context.fillStyle = this.state.color;
 
         let quote;
@@ -57,13 +57,13 @@ class App extends Component {
 
 
         //Said
-        context.font = this.state.size/2.5 + 'px TH Sarabun New';
+        context.font = this.state.size/2.5 + 'px Kanit';
         context.fillStyle = this.state.color;
 
         let said;
         saidBy.value ? (said = '' + saidBy.value + '') : (said = '');
-        const saidxOffset = (context.measureText(quote).width*3.3)-(context.measureText(said).width);
-        const saidyOffset = this.state.size/3.5;
+        const saidxOffset = (context.measureText(quote).width*2.3)-(context.measureText(said).width);
+        const saidyOffset = this.state.size/2.5;
         context.fillText(said,this.state.xOffset+saidxOffset,this.state.yOffset+saidyOffset);
       })
     }
