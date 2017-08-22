@@ -42,10 +42,17 @@ class App extends Component {
       image.src = require('../assets/templates/'+imageURL+'');
 
       image.onload = (() => {
-        //This line can be delete if this is saperate component => for CANVAS RENDER
+
+        //Try to clear canvas for redraw
+        // context.save();
+        // context.setTransform(1,0,0,1,0,0);
+        // context.clearRect(0,0,canvas.width,canvas.height);
+        // context.restore();\
+        
+        context.clearRect(0,0,canvas.width,canvas.height);
+        
         image.src = require('../assets/templates/'+this.state.image+'');
         context.drawImage(image, 0, 0);
-
 
         //Quote
         context.font = this.state.size + 'px Kanit';
@@ -54,7 +61,6 @@ class App extends Component {
         let quote;
         quoteText.value ? (quote = '“' + quoteText.value + '”') : (quote = '');
         context.fillText(quote,this.state.xOffset,this.state.yOffset);
-
 
         //Said
         context.font = this.state.size/2.5 + 'px Kanit';
